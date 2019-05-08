@@ -35,23 +35,23 @@ namespace Calculator
         /// <param name="width"></param>
         /// <param name="power"></param>
         /// <returns></returns>
-        public double JasonAlg(double maxProbability, double minProbability, double priorWinCount, double maxRewards, double width, double power)
+        public double JasonAlg(double maxProbability, double minProbability, double priorWinCount, double maxRewards)
         {
             double percentUsed = Math.Min(1, (priorWinCount / maxRewards));
-            double xAtFloor = this.findXAtFloor(width, power, maxProbability, minProbability);
+            double xAtFloor = this.findXAtFloor(maxProbability, minProbability);
 
             double x = percentUsed * xAtFloor;
-            double result = width * (Math.Pow(x, power)) + maxProbability;          
+            double result = -.01 * (Math.Pow(x, 2)) + (maxProbability * (1 - percentUsed));          
 
             var minPinched = Math.Max(minProbability, result);
             var maxPinched = Math.Min(maxProbability, minPinched);
             return maxPinched;
         }
 
-        private double findXAtFloor(double width, double power, double maxProbability, double minProbability)
+        private double findXAtFloor(double maxProbability, double minProbability)
         {
-            double middleResult = (minProbability - maxProbability) / (width);
-            return Math.Pow(middleResult, (double)(1d / power));
+            double middleResult = (minProbability - maxProbability) / (-1);
+            return Math.Pow(middleResult, (double)(1d / 2));
         }     
     }
 }
