@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Calculator
 {
@@ -12,13 +13,23 @@ namespace Calculator
 
         private static void Game2()
         {
+            var results = new List<AlgResults>();
             for(int currentWinCount = 0; currentWinCount < 75; currentWinCount++)
             {
                 var calc = new Calc();
                 var result = calc.JasonAlg(0.33d, 0d, currentWinCount, 75d);
-                Console.WriteLine(currentWinCount + " : " + result);
+                results.Add(new AlgResults(currentWinCount, result));
+                //Console.WriteLine(currentWinCount + " : " + result);
             }
+
+            WriteResults(results);
+
             Console.ReadLine();
+        }
+
+        private static void WriteResults(List<AlgResults> results)
+        {
+            
         }
 
         private static void Game1()
@@ -55,6 +66,18 @@ namespace Calculator
             double.TryParse(foo, out double count);
 
             return count;
+        }
+    }
+
+    internal class AlgResults
+    {
+        public int currentWinCount;
+        public double result;
+
+        public AlgResults(int currentWinCount, double result)
+        {
+            this.currentWinCount = currentWinCount;
+            this.result = result;
         }
     }
 }
